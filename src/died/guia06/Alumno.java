@@ -1,27 +1,92 @@
 package died.guia06;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class Alumno {
+public class Alumno implements Comparable<Alumno>{
 
 	private String nombre;
 	private Integer nroLibreta;
 	private List<Curso> cursando;
 	private List<Curso> aprobados;
 
+	//Constructor
+	public Alumno(String n, Integer l) {
+		nombre = n;
+		nroLibreta = l;
+		List<Curso> cursando = new ArrayList<Curso>();
+		List<Curso> aprobados = new ArrayList<Curso>();
+	}
+	
+	//Getters y Setters
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Integer getNroLibreta() {
+		return nroLibreta;
+	}
+
+	public void setNroLibreta(Integer nroLibreta) {
+		this.nroLibreta = nroLibreta;
+	}
+
+	public List<Curso> getCursando() {
+		return cursando;
+	}
+
+	public void setCursando(List<Curso> cursando) {
+		this.cursando = cursando;
+	}
+
+	public List<Curso> getAprobados() {
+		return aprobados;
+	}
+
+	public void setAprobados(List<Curso> aprobados) {
+		this.aprobados = aprobados;
+	}
+	
+	//Métodos
 	public int creditosObtenidos() {
-		return 1;
+		int creditos = 0;
+		if(!aprobados.isEmpty()) {
+			for(Curso c: aprobados) {
+				creditos += c.getCreditos();
+			}
+		}
+		return creditos;
 	}
 
 	public void aprobar(Curso c) {
-		//
+		cursando.remove(c);
+		aprobados.add(c);
 	}
 
 	public void inscripcionAceptada(Curso c) {
-		//
+		if(c.inscribir(this)) {
+			cursando.add(c);
+		}
 	}
 	
-	
+	@Override
+	public boolean equals(Object o) {
+		return (o instanceof Alumno && ((Alumno)o).nroLibreta == this.nroLibreta);
+	}
+
+	@Override
+	public int compareTo(Alumno o) {
+		/**Retorna:
+		* Negativo si el nombre del alumno o va después
+		* 0 si son iguales
+		* Positivo si el nombre del alumno o va antes
+		*/
+		return this.nombre.compareTo(o.nombre);
+	}
 
 }

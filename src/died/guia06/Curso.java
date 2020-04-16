@@ -26,10 +26,20 @@ public class Curso {
 	
 	private Registro log;
 	
+	//Constructor
 	public Curso() {
 		super();
 		this.inscriptos = new ArrayList<Alumno>();
 		this.log = new Registro();
+	}
+	
+	//Getters y Setters
+	public Integer getCreditos() {
+		return creditos;
+	}
+
+	public void setCreditos(Integer creditos) {
+		this.creditos = creditos;
 	}
 	
 
@@ -68,6 +78,5 @@ public class Curso {
 			System.out.println("Error al imprimir listado");
 		}
 	}
-
 
 }
