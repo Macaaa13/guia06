@@ -47,12 +47,14 @@ public class Curso {
 	 * @return
 	 */
 	public Boolean inscribir(Alumno a) {
+		boolean b = true;
 		try {
 			log.registrar(this, "inscribir ",a.toString());
 		} catch (IOException e) {
-			System.out.println("Inscripción fallida");
+			System.out.println("Error al inscribir");
+			b = false;
 		}
-		return false;
+		return b;
 	}
 	
 	
@@ -63,7 +65,7 @@ public class Curso {
 		try {
 			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
 		} catch (IOException e) {
-			System.out.println("Impresión fallida");
+			System.out.println("Error al imprimir listado");
 		}
 	}
 
