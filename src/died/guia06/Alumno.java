@@ -15,8 +15,8 @@ public class Alumno implements Comparable<Alumno>{
 	public Alumno(String n, Integer l) {
 		nombre = n;
 		nroLibreta = l;
-		List<Curso> cursando = new ArrayList<Curso>();
-		List<Curso> aprobados = new ArrayList<Curso>();
+		cursando = new ArrayList<Curso>();
+		aprobados = new ArrayList<Curso>();
 	}
 	
 	//Getters y Setters
@@ -55,7 +55,7 @@ public class Alumno implements Comparable<Alumno>{
 	//Métodos
 	public int creditosObtenidos() {
 		int creditos = 0;
-		if(!aprobados.isEmpty()) {
+		if(!(aprobados.isEmpty())) {
 			for(Curso c: aprobados) {
 				creditos += c.getCreditos();
 			}
@@ -64,8 +64,14 @@ public class Alumno implements Comparable<Alumno>{
 	}
 
 	public void aprobar(Curso c) {
-		cursando.remove(c);
-		aprobados.add(c);
+		/** Si la lista está vacía, ningun curso puede ser aprobado
+		 *  Si el curso no está en la lista, no se cursó y no puede ser aprobado
+		 *  Si intenta aprobar un curso ya aprobado, éste no se encontraría en la lista cursando
+		 */
+		if(!(cursando.isEmpty()) && cursando.contains(c)) {
+			cursando.remove(c);
+			aprobados.add(c);
+		}
 	}
 
 	public void inscripcionAceptada(Curso c) {
@@ -88,5 +94,12 @@ public class Alumno implements Comparable<Alumno>{
 		*/
 		return this.nombre.compareTo(o.nombre);
 	}
+
+	@Override
+	public String toString() {
+		return nombre + ", " + nroLibreta;
+	}
+	
+	
 
 }
