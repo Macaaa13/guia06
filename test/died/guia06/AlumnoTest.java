@@ -15,6 +15,7 @@ class AlumnoTest {
 	public void init() {
 		a1 = new Alumno("Juan", 100);
 		c1 = new Curso();
+		c1.setCreditosRequeridos(0);
 	}
 	
 	//Test del método tieneCreditos
