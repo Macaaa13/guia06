@@ -50,6 +50,30 @@ public class Curso {
 	public void setCreditosRequeridos(Integer creditosRequeridos) {
 		this.creditosRequeridos = creditosRequeridos;
 	}
+	
+	public List<Alumno> getInscriptos() {
+		return inscriptos;
+	}
+
+	public void setInscriptos(List<Alumno> inscriptos) {
+		this.inscriptos = inscriptos;
+	}
+
+	public Integer getCicloLectivo() {
+		return cicloLectivo;
+	}
+
+	public void setCicloLectivo(Integer cicloLectivo) {
+		this.cicloLectivo = cicloLectivo;
+	}
+
+	public Integer getCupo() {
+		return cupo;
+	}
+
+	public void setCupo(Integer cupo) {
+		this.cupo = cupo;
+	}
 
 	//Métodos
 	/**
@@ -73,7 +97,7 @@ public class Curso {
 			b = false;
 		}
 		// El curso debe tener cupo
-		else if(this.inscriptos.size() == this.cupo) {
+		else if(!(inscriptos.isEmpty()) && this.inscriptos.size() == this.cupo) {
 			System.out.println("El curso no tiene cupo");
 			b = false;
 		}
@@ -86,6 +110,7 @@ public class Curso {
 			try {
 				log.registrar(this, "inscribir ",a.toString());
 				this.inscriptos.add(a);
+				a.getCursando().add(this);
 			} catch (IOException e) {
 				System.out.println("Error al inscribir");
 				b = false;

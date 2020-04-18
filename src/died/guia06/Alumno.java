@@ -76,7 +76,10 @@ public class Alumno implements Comparable<Alumno>{
 
 	public void inscripcionAceptada(Curso c) {
 		if(c.inscribir(this)) {
-			cursando.add(c);
+			System.out.println("Inscripción Aceptada");
+		}
+		else {
+			System.out.println("Inscripción Rechazada");
 		}
 	}
 	
@@ -97,7 +100,7 @@ public class Alumno implements Comparable<Alumno>{
 
 	@Override
 	public String toString() {
-		return nombre + ", " + nroLibreta;
+		return nombre + ", Libreta: " + nroLibreta;
 	}
 	
 	
