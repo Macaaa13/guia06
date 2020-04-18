@@ -2,6 +2,7 @@ package died.guia06;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import died.guia06.util.Registro;
@@ -66,11 +67,29 @@ public class Curso {
 	 */
 	public Boolean inscribir(Alumno a) {
 		boolean b = true;
-		try {
-			log.registrar(this, "inscribir ",a.toString());
-		} catch (IOException e) {
-			System.out.println("Error al inscribir");
+		//El alumno debe tener como mínimo los créditos necesarios
+		if(a.creditosObtenidos() < this.creditosRequeridos) {
+			System.out.println("No posee los créditos suficientes para cursar");
 			b = false;
+		}
+		// El curso debe tener cupo
+		else if(this.inscriptos.size() == this.cupo) {
+			System.out.println("El curso no tiene cupo");
+			b = false;
+		}
+		// El alumno solo puede hacer 3 cursos del mismo ciclo lectivo al mismo tiempo 
+		else if(this.cantidadCicloLectivo(a.getCursando(), this.cicloLectivo)==3) {
+			System.out.println("Solo se pueden hacer 3 cursos con el mismo ciclo lectivo a la vez");
+			b = false;
+		}
+		else {
+			try {
+				log.registrar(this, "inscribir ",a.toString());
+				this.inscriptos.add(a);
+			} catch (IOException e) {
+				System.out.println("Error al inscribir");
+				b = false;
+			}
 		}
 		return b;
 	}
@@ -82,9 +101,31 @@ public class Curso {
 	public void imprimirInscriptos() {
 		try {
 			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+			CompararNombre comparador = new CompararNombre();
+			Collections.sort(inscriptos, comparador);
+			System.out.println(inscriptos);
 		} catch (IOException e) {
 			System.out.println("Error al imprimir listado");
 		}
+	}
+	
+	//Métodos auxiliares
+	public int cantidadCicloLectivo(List<Curso> cursando, Integer ciclo) {
+		/** Se pasa como argumentos la lista de cursos que el alumno está cursando
+		 *  y el ciclo del curso al que se quiere inscribir.
+		 *  Un alumno solo puede cursar 3 cursos del mismo ciclo lectivo, por lo que el
+		 *  método devuelve la cantidad de cursos que el alumno está cursando con 
+		 *  el mismo ciclo lectivo que el curso al que se quiere inscribir.
+		 */
+		int cantCiclo = 0;
+		if(!cursando.isEmpty()) {
+			for(Curso c: cursando) {
+				if(c.cicloLectivo == ciclo) {
+					cantCiclo++;
+				}
+			}
+		}
+		return cantCiclo;
 	}
 
 }
