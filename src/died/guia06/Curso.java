@@ -27,9 +27,20 @@ public class Curso {
 	
 	private Registro log;
 	
-	//Constructor
+	//Constructores
 	public Curso() {
 		super();
+		this.inscriptos = new ArrayList<Alumno>();
+		this.log = new Registro();
+	}
+	
+	public Curso(Integer id, String nombre, Integer ciclo, Integer cupo, Integer creditos, Integer creditosReq) {
+		this.id = id;
+		this.nombre = nombre;
+		this.cicloLectivo = ciclo;
+		this.cupo = cupo;
+		this.creditos = creditos;
+		this.creditosRequeridos = creditosReq;
 		this.inscriptos = new ArrayList<Alumno>();
 		this.log = new Registro();
 	}
@@ -75,6 +86,14 @@ public class Curso {
 		this.cupo = cupo;
 	}
 
+	public Registro getLog() {
+		return log;
+	}
+
+	public void setLog(Registro log) {
+		this.log = log;
+	}
+
 	//Métodos
 	/**
 	 * Este mÃ©todo, verifica si el alumno se puede inscribir y si es asÃ­ lo agrega al curso,
@@ -91,17 +110,22 @@ public class Curso {
 	 */
 	public Boolean inscribir(Alumno a) {
 		boolean b = true;
+		//El alumno no puede inscribirse a un curso al que ya está inscripto
+		if(this.inscriptos.contains(a)) {
+			System.out.println("Ya está inscripto al curso");
+			b = false;
+		}
 		//El alumno debe tener como mínimo los créditos necesarios
-		if(a.creditosObtenidos() < this.creditosRequeridos) {
+		else if(a.creditosObtenidos() < this.creditosRequeridos) {
 			System.out.println("No posee los créditos suficientes para cursar");
 			b = false;
 		}
-		// El curso debe tener cupo
+		//El curso debe tener cupo
 		else if(!(inscriptos.isEmpty()) && this.inscriptos.size() == this.cupo) {
 			System.out.println("El curso no tiene cupo");
 			b = false;
 		}
-		// El alumno solo puede hacer 3 cursos del mismo ciclo lectivo al mismo tiempo 
+		//El alumno solo puede hacer 3 cursos del mismo ciclo lectivo al mismo tiempo 
 		else if(this.cantidadCicloLectivo(a.getCursando(), this.cicloLectivo)==3) {
 			System.out.println("Solo se pueden hacer 3 cursos con el mismo ciclo lectivo a la vez");
 			b = false;
@@ -151,6 +175,11 @@ public class Curso {
 			}
 		}
 		return cantCiclo;
+	}
+
+	@Override
+	public String toString() {
+		return nombre;
 	}
 
 }

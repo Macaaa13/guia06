@@ -20,14 +20,6 @@ public class Alumno implements Comparable<Alumno>{
 	}
 	
 	//Getters y Setters
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	public Integer getNroLibreta() {
 		return nroLibreta;
 	}
@@ -35,7 +27,7 @@ public class Alumno implements Comparable<Alumno>{
 	public void setNroLibreta(Integer nroLibreta) {
 		this.nroLibreta = nroLibreta;
 	}
-
+	
 	public List<Curso> getCursando() {
 		return cursando;
 	}
@@ -71,15 +63,16 @@ public class Alumno implements Comparable<Alumno>{
 		if(!(cursando.isEmpty()) && cursando.contains(c)) {
 			cursando.remove(c);
 			aprobados.add(c);
+			c.getInscriptos().remove(this);
 		}
 	}
 
 	public void inscripcionAceptada(Curso c) {
 		if(c.inscribir(this)) {
-			System.out.println("Inscripción Aceptada");
+			System.out.println("La inscripción del alumno " + this.nombre + " fue aceptada");
 		}
 		else {
-			System.out.println("Inscripción Rechazada");
+			System.out.println("La inscripción del alumno " + this.nombre + " fue rechazada");
 		}
 	}
 	

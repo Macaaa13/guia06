@@ -4,7 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -125,6 +124,11 @@ class CursoTest {
 		c1.setCreditosRequeridos(0);
 		c1.inscribir(a1);
 		assertTrue(c1.getInscriptos().contains(a1));
+	}
+	
+	@Test
+	void testInscribirCursoYaInscripto() {
+		assertFalse(c2.inscribir(a1));
 	}
 	
 	//Test del método imprimirInscriptos	
