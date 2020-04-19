@@ -118,21 +118,22 @@ public class Curso {
 			b = false;
 		}
 		//El alumno debe tener como mínimo los créditos necesarios
-		else if(a.creditosObtenidos() < this.creditosRequeridos) {
+		if(a.creditosObtenidos() < this.creditosRequeridos) {
 			System.out.println("No posee créditos suficientes para cursar");
 			b = false;
 		}
 		//El curso debe tener cupo
-		else if(!(inscriptos.isEmpty()) && this.inscriptos.size() == this.cupo) {
+		if(!(inscriptos.isEmpty()) && this.inscriptos.size() == this.cupo) {
 			System.out.println("El curso no tiene cupo");
 			b = false;
 		}
 		//El alumno solo puede hacer 3 cursos del mismo ciclo lectivo al mismo tiempo 
-		else if(this.cantidadCicloLectivo(a.getCursando(), this.cicloLectivo)==3) {
+		if(this.cantidadCicloLectivo(a.getCursando(), this.cicloLectivo)==3) {
 			System.out.println("Solo se pueden hacer 3 cursos con el mismo ciclo lectivo a la vez");
 			b = false;
 		}
-		else {
+		//Si b es true significa que se cumplieron las condiciones anteriores
+		if(b){
 			try {
 				log.registrar(this, "inscribir ",a.toString());
 				this.inscriptos.add(a);
@@ -188,34 +189,32 @@ public class Curso {
 		}
 	}
 	
-	//Paso 07
+	//Paso 07	
 	public void inscribirAlumno(Alumno a) throws AlumnoYaInscriptoException, CreditosInsuficientesException, CupoLlenoException, LimiteMateriasMismoCicloException, IOException, RegistroAuditoriaException {
 		//El alumno no puede inscribirse a un curso al que ya está inscripto
 		if(this.inscriptos.contains(a)) {
 			throw new AlumnoYaInscriptoException("Ya está inscripto al curso");
 		}
 		//El alumno debe tener como mínimo los créditos necesarios
-		else if(a.creditosObtenidos() < this.creditosRequeridos) {
+		if(a.creditosObtenidos() < this.creditosRequeridos) {
 			throw new CreditosInsuficientesException("No posee créditos suficientes para cursar");
 		}
 		//El curso debe tener cupo
-		else if(!(inscriptos.isEmpty()) && this.inscriptos.size() == this.cupo) {
+		if(!(inscriptos.isEmpty()) && this.inscriptos.size() == this.cupo) {
 			throw new CupoLlenoException("El curso está lleno");
 		}
 		//El alumno solo puede hacer 3 cursos del mismo ciclo lectivo al mismo tiempo 
-		else if(this.cantidadCicloLectivo(a.getCursando(), this.cicloLectivo)==3) {
+		if(this.cantidadCicloLectivo(a.getCursando(), this.cicloLectivo)==3) {
 			throw new LimiteMateriasMismoCicloException("Solo se pueden hacer 3 cursos con el mismo ciclo lectivo a la vez");
 		}
-		else {
-			try{
-				log.registrar(this, "inscribir ",a.toString());
-				this.inscriptos.add(a);
-				a.getCursando().add(this);
-			}
-			catch (IOException e) {
-				throw new RegistroAuditoriaException("Error al registrar la inscripción");
-			}	
+		try{
+			log.registrar(this, "inscribir ",a.toString());
+			this.inscriptos.add(a);
+			a.getCursando().add(this);
 		}
+		catch (IOException e) {
+			throw new RegistroAuditoriaException("Error al registrar la inscripción");
+		}	
 	}
 	
 	//Métodos auxiliares
