@@ -1,5 +1,13 @@
 package died.guia06;
 
+import java.io.IOException;
+
+import died.guia06.excepciones.AlumnoYaInscriptoException;
+import died.guia06.excepciones.CreditosInsuficientesException;
+import died.guia06.excepciones.CupoLlenoException;
+import died.guia06.excepciones.LimiteMateriasMismoCicloException;
+import died.guia06.excepciones.RegistroAuditoriaException;
+
 public class App {
 
 	public static void main(String[] args) {
@@ -26,37 +34,108 @@ public class App {
 		
 		//Alumnos inscriptos a tiempo en:
 		//Física
-		c1.inscribir(a3);
-		c1.inscribir(a6);
+		try {
+			c1.inscribirAlumno(a3);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c1.inscribirAlumno(a6);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
 		
 		//AMI
-		c2.inscribir(a1);
-		c2.inscribir(a3);
-		c2.inscribir(a5);
+		try {
+			c2.inscribirAlumno(a1);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c2.inscribirAlumno(a3);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c2.inscribirAlumno(a5);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
 		
 		//AGA
-		c3.inscribir(a1);
-		c3.inscribir(a3);
-		c3.inscribir(a5);
+		try {
+			c3.inscribirAlumno(a1);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c3.inscribirAlumno(a3);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c3.inscribirAlumno(a5);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
 		
 		//Algoritmos
-		c4.inscribir(a2);
-		c4.inscribir(a6);
+		try {
+			c4.inscribirAlumno(a2);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c4.inscribirAlumno(a6);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
 		
 		//Alumnos intentando inscribirse tarde en:
 		/** [Se usa inscripcionAceptada en vez de inscribir para que
 		 *   muestre por pantalla si la inscripción fue aceptada o no]
 		 */
 		//Física
-		a4.inscripcionAceptada(c1);
-		a2.inscripcionAceptada(c1); //Cupo lleno
+		try {
+			c1.inscribirAlumno(a4);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c1.inscribirAlumno(a2); // Cupo lleno
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		} 
 		
 		//Algoritmos
-		a4.inscripcionAceptada(c4);
-		a5.inscripcionAceptada(c4);
+		try {
+			c4.inscribirAlumno(a4);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c4.inscribirAlumno(a5);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		
 		
 		// ------ Impresión de Inscriptos por Nombre ------
-		System.out.println("\n Alumnos ordenados por Nombre:");
+		System.out.println("\nAlumnos ordenados por Nombre:");
 		System.out.println("Curso 1: ");
 		c1.imprimirInscriptosPorNombre();
 		System.out.println("Curso 2: ");
@@ -100,43 +179,143 @@ public class App {
 		// ------ Segunda Inscripción ------
 		//Por orden de inscripción:
 		//Física
-		c1.inscribir(a2);
-		c1.inscribir(a4); //Ya inscripto
-		c1.inscribir(a1); //Cupo lleno
+		try {
+			c1.inscribirAlumno(a2);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c1.inscribirAlumno(a4); // Ya inscripto
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c1.inscribirAlumno(a1); //Cupo lleno
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
 
 		//AMI
-		c2.inscribir(a4);
+		try {
+			c2.inscribirAlumno(a4);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
 		
 		//AGA
-		c3.inscribir(a2);
-		c3.inscribir(a4); //a4 ya está cursando 3 materias del ciclo 1
-		c3.inscribir(a6);
+		try {
+			c3.inscribirAlumno(a2);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c3.inscribirAlumno(a4); //a4 ya está cursando 3 materias del ciclo 1
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c3.inscribirAlumno(a6);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
 		
 		//Algoritmos
-		c4.inscribir(a1);
-		c4.inscribir(a3);
+		try {
+			c4.inscribirAlumno(a1);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c4.inscribirAlumno(a3);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
 		
 		//AMII
-		c5.inscribir(a1); //Créditos insuficientes
-		c5.inscribir(a5);
+		try {
+			c5.inscribirAlumno(a1); //Créditos insuficientes
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c5.inscribirAlumno(a5);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
 		
 		//Física 2
-		c6.inscribir(a5);
+		try {
+			c6.inscribirAlumno(a5);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
 		
 		//Química
-		c7.inscribir(a1);
-		c7.inscribir(a5);
-		c7.inscribir(a3); //Cupo lleno
+		try {
+			c7.inscribirAlumno(a1);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c7.inscribirAlumno(a5);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c7.inscribirAlumno(a3); //Cupo lleno
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
 		
 		//Inglés
-		c8.inscribir(a1);
-		c8.inscribir(a2);
-		c8.inscribir(a3);
-		c8.inscribir(a5); //a5 ua está cursando 3 materias del ciclo 2
-		c8.inscribir(a6);
+		try {
+			c8.inscribirAlumno(a1);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c8.inscribirAlumno(a2);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c8.inscribirAlumno(a3);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			c8.inscribirAlumno(a5); //a5 ua está cursando 3 materias del ciclo 2
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		} 
+		try {
+			c8.inscribirAlumno(a6);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException
+				| LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+		}
 		
 		// ------ Impresión de Inscriptos por Créditos ------
-		System.out.println("\n Alumnos ordenados por Créditos:");
+		System.out.println("\nAlumnos ordenados por Créditos:");
 		System.out.println("Curso 1: ");
 		c1.imprimirInscriptosPorCreditos();
 		System.out.println("Curso 2: ");
@@ -155,7 +334,7 @@ public class App {
 		c8.imprimirInscriptosPorCreditos();
 		
 		// ------ Impresión de Inscriptos por Libreta ------
-		System.out.println("\n Alumnos ordenados por Libreta:");
+		System.out.println("\nAlumnos ordenados por Libreta:");
 		System.out.println("Curso 1: ");
 		c1.imprimirInscriptosPorLibreta();
 		System.out.println("Curso 2: ");

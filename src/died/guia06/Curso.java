@@ -191,6 +191,7 @@ public class Curso {
 	
 	//Paso 07	
 	public void inscribirAlumno(Alumno a) throws AlumnoYaInscriptoException, CreditosInsuficientesException, CupoLlenoException, LimiteMateriasMismoCicloException, IOException, RegistroAuditoriaException {
+		System.out.println("Inscribiendo a "+ a.getNombre() +" en el curso "+ this.nombre+"...");
 		//El alumno no puede inscribirse a un curso al que ya está inscripto
 		if(this.inscriptos.contains(a)) {
 			throw new AlumnoYaInscriptoException("Ya está inscripto al curso");

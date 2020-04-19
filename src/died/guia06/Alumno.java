@@ -44,6 +44,14 @@ public class Alumno implements Comparable<Alumno>{
 		this.aprobados = aprobados;
 	}
 	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 	//Métodos
 	public int creditosObtenidos() {
 		int creditos = 0;
@@ -93,7 +101,7 @@ public class Alumno implements Comparable<Alumno>{
 
 	@Override
 	public String toString() {
-		return nombre + ", Libreta: " + nroLibreta + ", Créditos: " + this.creditosObtenidos();
+		return nombre + " - Libreta: " + nroLibreta + " - Créditos: " + this.creditosObtenidos();
 	}
 	
 	
