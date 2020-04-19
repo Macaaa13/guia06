@@ -3,6 +3,7 @@ package died.guia06;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import died.guia06.comparadores.*;
+import died.guia06.excepciones.*;
 
 class CursoTest {
 
@@ -48,23 +50,26 @@ class CursoTest {
 		c3.inscribir(a1);
 	}
 	
-	//Test del método inscribir
+	
+	// ------ Test del método inscribir ------
 	@Test
 	/** Si el alumno no tiene los créditos suficientes para cursar, no se agrega
 	 *  a la lista de inscriptos
-	*/
+	 *  a1 no tiene créditos, por lo que no puede inscribirse a c1
+	 */
 	void testInscribirCreditosInsuficientes() {
-		c2.setCreditos(5);
-		a1.aprobar(c2);
-		c1.setCreditosRequeridos(10);
+		c1.setCreditosRequeridos(5);
 		c1.inscribir(a1);
 		assertFalse(c1.getInscriptos().contains(a1));
 	}
 	
 	@Test
 	/** Si el alumno tiene los créditos suficientes para cursar, se agrega a
-	 *  la lista de inscriptos
-	*/
+	 *  la lista de inscriptos.
+	 *  a1 ya estaba inscripto a c2, y al aprobarlo obtiene 5 créditos.
+	 *  Como los créditos requeridos para inscribirse a c1 son 5, a1 puede inscribirse
+	 *  y se agrega a la lista de inscriptos. 
+	 */
 	void testInscribirCreditosSuficientes() {
 		c2.setCreditos(5);
 		a1.aprobar(c2);
@@ -94,7 +99,7 @@ class CursoTest {
 	@Test
 	/** Si el curso no tiene el cupo lleno, se agrega el alumno a1 a la lista de
 	 *  inscriptos.
-	 *  Como el curso tenía un alumno y el cupo es 2, a1 puede inscribirse
+	 *  Como el curso tenía un alumno (a2) y el cupo es 2, a1 puede inscribirse
 	 */
 	void testInscribirConCupo() {
 		c1.setCreditosRequeridos(0);
@@ -130,10 +135,12 @@ class CursoTest {
 	
 	@Test
 	void testInscribirCursoYaInscripto() {
+		c2.setCupo(2);
 		assertFalse(c2.inscribir(a1));
 	}
 	
-	//Test del método imprimirInscriptos	
+	
+	// ------ Test del método imprimirInscriptos ------
 	@Test
 	/** Si la lista pudo registrarse sin problemas, debería estar ordenada alfabéticamente.
 	 *  Si la comparo con otra lista con los mismos elementos ordenados alfabéticamente, 
@@ -189,7 +196,6 @@ class CursoTest {
 		lista.add(a1);
 		lista.add(a2);
 		Collections.sort(lista, comparador);
-		System.out.println(lista);
 		
 		c4.setCupo(3);
 		c4.inscribir(a1);
@@ -219,7 +225,6 @@ class CursoTest {
 		lista.add(a1);
 		lista.add(a2);
 		Collections.sort(lista, comparador);
-		System.out.println(lista);
 		
 		c4.setCupo(3);
 		c4.inscribir(a1);
@@ -228,5 +233,61 @@ class CursoTest {
 		c4.imprimirInscriptosPorCreditos();
 		assertEquals(c4.getInscriptos(), lista);
 	}
-
+	
+	
+	// ------ Test del método inscribirAlumno ------
+	@Test
+	void testAlumnoYaInscripto() {
+		Exception a = new Exception();
+		try {
+			c2.inscribirAlumno(a1);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException | LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+			a = e;
+		}
+		assertTrue(a instanceof AlumnoYaInscriptoException);
+	}
+	
+	@Test
+	void testCreditosInsuficientes() {
+		Exception a = new Exception();
+		c4.setCreditosRequeridos(50);
+		try {
+			c4.inscribirAlumno(a1);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException | LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+			a = e;
+		}
+		assertTrue(a instanceof CreditosInsuficientesException);
+	}
+	
+	@Test
+	void testCupoLleno() {
+		Exception a = new Exception();
+		c2.setCupo(1);
+		//El alumno a1 ya está inscripto al curso c2
+		try {
+			c2.inscribirAlumno(a2);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException | LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+			a = e;
+		}
+		assertTrue(a instanceof CupoLlenoException);
+	}
+	
+	@Test
+	void testLimiteMateriasMismoCiclo() {
+		Exception a = new Exception();
+		c1.setCreditosRequeridos(0);
+		c4.inscribir(a1);
+		// El alumno a1 ya estaba inscripto a los cursos a2 y a3
+		try {
+			c1.inscribirAlumno(a1);
+		} catch (AlumnoYaInscriptoException | CreditosInsuficientesException | CupoLlenoException | LimiteMateriasMismoCicloException | IOException | RegistroAuditoriaException e) {
+			System.out.println(e.getMessage());
+			a = e;
+		}
+		assertTrue(a instanceof LimiteMateriasMismoCicloException);
+	}
+	
 }

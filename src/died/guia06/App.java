@@ -56,7 +56,7 @@ public class App {
 		a5.inscripcionAceptada(c4);
 		
 		// ------ Impresión de Inscriptos por Nombre ------
-		System.out.println("Alumnos ordenados por Nombre:");
+		System.out.println("\n Alumnos ordenados por Nombre:");
 		System.out.println("Curso 1: ");
 		c1.imprimirInscriptosPorNombre();
 		System.out.println("Curso 2: ");
@@ -95,7 +95,7 @@ public class App {
 		a2.aprobar(c4);
 		a5.aprobar(c4);
 		a6.aprobar(c4);
-		
+
 		
 		// ------ Segunda Inscripción ------
 		//Por orden de inscripción:
@@ -108,9 +108,13 @@ public class App {
 		c2.inscribir(a4);
 		
 		//AGA
+		c3.inscribir(a2);
 		c3.inscribir(a4); //a4 ya está cursando 3 materias del ciclo 1
+		c3.inscribir(a6);
 		
 		//Algoritmos
+		c4.inscribir(a1);
+		c4.inscribir(a3);
 		
 		//AMII
 		c5.inscribir(a1); //Créditos insuficientes
@@ -125,11 +129,14 @@ public class App {
 		c7.inscribir(a3); //Cupo lleno
 		
 		//Inglés
+		c8.inscribir(a1);
+		c8.inscribir(a2);
+		c8.inscribir(a3);
 		c8.inscribir(a5); //a5 ua está cursando 3 materias del ciclo 2
-		
+		c8.inscribir(a6);
 		
 		// ------ Impresión de Inscriptos por Créditos ------
-		System.out.println("Alumnos ordenados por Créditos:");
+		System.out.println("\n Alumnos ordenados por Créditos:");
 		System.out.println("Curso 1: ");
 		c1.imprimirInscriptosPorCreditos();
 		System.out.println("Curso 2: ");
@@ -148,7 +155,7 @@ public class App {
 		c8.imprimirInscriptosPorCreditos();
 		
 		// ------ Impresión de Inscriptos por Libreta ------
-		System.out.println("Alumnos ordenados por Libreta:");
+		System.out.println("\n Alumnos ordenados por Libreta:");
 		System.out.println("Curso 1: ");
 		c1.imprimirInscriptosPorLibreta();
 		System.out.println("Curso 2: ");

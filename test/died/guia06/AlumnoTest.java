@@ -18,7 +18,8 @@ class AlumnoTest {
 		c1.setCreditosRequeridos(0);
 	}
 	
-	//Test del método tieneCreditos
+	
+	// ------ Test del método tieneCreditos ------
 	@Test
 	void testNoTieneCreditos() {
 		//Al no haber aprobado ningun curso, los créditos del alumno son 0
@@ -39,7 +40,8 @@ class AlumnoTest {
 		assertEquals(esperado, 10);
 	}
 	
-	//Test del método aprobar
+	
+	// ------ Test del método aprobar ------
 	@Test
 	void testAprobarCursoCursado() {
 		/** Al haber cursado el curso c1, el alumno puede aprobarlo.
@@ -62,7 +64,8 @@ class AlumnoTest {
 		assertFalse(a1.getAprobados().contains(c1));
 	}
 	
-	//Test del método inscripcionAceptada
+	
+	// ------ Test del método inscripcionAceptada ------
 	@Test
 	void testInscripcionAceptada() {
 		// Si la inscripción fue aceptada, el curso c1 debería aparecer en la lista cursados
