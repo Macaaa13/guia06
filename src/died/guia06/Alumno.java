@@ -93,7 +93,7 @@ public class Alumno implements Comparable<Alumno>{
 
 	@Override
 	public String toString() {
-		return nombre + ", Libreta: " + nroLibreta;
+		return nombre + ", Libreta: " + nroLibreta + ", Créditos: " + this.creditosObtenidos();
 	}
 	
 	

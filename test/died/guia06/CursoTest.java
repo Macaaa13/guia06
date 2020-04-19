@@ -10,6 +10,8 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import died.guia06.comparadores.*;
+
 class CursoTest {
 
 	//3 alumnos para probar el cupo máximo cuando éste es 2
@@ -137,7 +139,7 @@ class CursoTest {
 	 *  Si la comparo con otra lista con los mismos elementos ordenados alfabéticamente, 
 	 *  ambas listas deberían ser iguales
 	 */
-	void testImprimirInscriptos() {
+	void testImprimirInscriptosPorNombre() {
 		CompararNombre comparador = new CompararNombre();
 		List<Alumno> lista = new ArrayList<Alumno>();
 		lista.add(a3);
@@ -149,8 +151,81 @@ class CursoTest {
 		c4.inscribir(a1);
 		c4.inscribir(a2);
 		c4.inscribir(a3);
-		System.out.println(c4.getInscriptos());
-		c4.imprimirInscriptos();
+		c4.imprimirInscriptosPorNombre();
+		assertEquals(c4.getInscriptos(), lista);
+	}
+	
+	@Test
+	/** Si la lista pudo registrarse sin problemas, debería estar ordenada por libreta.
+	 *  Si la comparo con otra lista con los mismos elementos ordenados por libreta, 
+	 *  ambas listas deberían ser iguales
+	 */
+	void testImprimirInscriptosPorLibreta() {
+		CompararLibreta comparador = new CompararLibreta();
+		List<Alumno> lista = new ArrayList<Alumno>();
+		lista.add(a3);
+		lista.add(a1);
+		lista.add(a2);
+		Collections.sort(lista, comparador);
+		
+		c4.setCupo(3);
+		c4.inscribir(a1);
+		c4.inscribir(a2);
+		c4.inscribir(a3);
+		c4.imprimirInscriptosPorLibreta();
+		assertEquals(c4.getInscriptos(), lista);
+	}
+	
+	@Test
+	/** Si la lista pudo registrarse sin problemas, debería estar ordenada por creditos.
+	 *  Si la comparo con otra lista con los mismos elementos ordenados por creditos, 
+	 *  ambas listas deberían ser iguales
+	 *  Si 2 o más alumnos no tienen créditos, se los ordena por nombre
+	 */
+	void testImprimirInscriptosPorCreditosSinCreditos() {
+		CompararCreditos comparador = new CompararCreditos();
+		List<Alumno> lista = new ArrayList<Alumno>();
+		lista.add(a3);
+		lista.add(a1);
+		lista.add(a2);
+		Collections.sort(lista, comparador);
+		System.out.println(lista);
+		
+		c4.setCupo(3);
+		c4.inscribir(a1);
+		c4.inscribir(a2);
+		c4.inscribir(a3);
+		c4.imprimirInscriptosPorCreditos();
+		assertEquals(c4.getInscriptos(), lista);
+	}
+	
+	@Test
+	/** Si la lista pudo registrarse sin problemas, debería estar ordenada por creditos.
+	 *  Si la comparo con otra lista con los mismos elementos ordenados por creditos, 
+	 *  ambas listas deberían ser iguales
+	 */
+	void testImprimirInscriptosPorCreditosConCreditos() {
+		c2.setCreditos(2);
+		c3.setCreditos(5);
+		a1.aprobar(c2);
+		a1.aprobar(c3);
+		a2.inscripcionAceptada(c2);
+		a2.aprobar(c2);
+		//a1 tiene 7 créditos, a2 tiene 2 créditos y a3 no tiene créditos
+		
+		CompararCreditos comparador = new CompararCreditos();
+		List<Alumno> lista = new ArrayList<Alumno>();
+		lista.add(a3);
+		lista.add(a1);
+		lista.add(a2);
+		Collections.sort(lista, comparador);
+		System.out.println(lista);
+		
+		c4.setCupo(3);
+		c4.inscribir(a1);
+		c4.inscribir(a2);
+		c4.inscribir(a3);
+		c4.imprimirInscriptosPorCreditos();
 		assertEquals(c4.getInscriptos(), lista);
 	}
 

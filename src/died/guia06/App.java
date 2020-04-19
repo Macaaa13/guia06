@@ -20,25 +20,7 @@ public class App {
 		Curso c6 = new Curso(6,"Física 2",2,3,10,10);
 		Curso c7 = new Curso(7,"Química",2,2,10,10);
 		Curso c8 = new Curso(8, "Inglés",2,4,5,5);
-
 		
-		// ------ Impresión de Inscriptos ------
-		System.out.println("Curso 1: ");
-		c1.imprimirInscriptos();
-		System.out.println("Curso 2: ");
-		c2.imprimirInscriptos();
-		System.out.println("Curso 3: ");
-		c3.imprimirInscriptos();
-		System.out.println("Curso 4: ");
-		c4.imprimirInscriptos();
-		System.out.println("Curso 5: ");
-		c5.imprimirInscriptos();
-		System.out.println("Curso 6: ");
-		c6.imprimirInscriptos();
-		System.out.println("Curso 7: ");
-		c7.imprimirInscriptos();
-		System.out.println("Curso 8: ");
-		c8.imprimirInscriptos();
 		
 		// ------ Primera Inscripción ------
 		
@@ -73,23 +55,24 @@ public class App {
 		a4.inscripcionAceptada(c4);
 		a5.inscripcionAceptada(c4);
 		
-		// ------ Impresión de Inscriptos ------
+		// ------ Impresión de Inscriptos por Nombre ------
+		System.out.println("Alumnos ordenados por Nombre:");
 		System.out.println("Curso 1: ");
-		c1.imprimirInscriptos();
+		c1.imprimirInscriptosPorNombre();
 		System.out.println("Curso 2: ");
-		c2.imprimirInscriptos();
+		c2.imprimirInscriptosPorNombre();
 		System.out.println("Curso 3: ");
-		c3.imprimirInscriptos();
+		c3.imprimirInscriptosPorNombre();
 		System.out.println("Curso 4: ");
-		c4.imprimirInscriptos();
+		c4.imprimirInscriptosPorNombre();
 		System.out.println("Curso 5: ");
-		c5.imprimirInscriptos();
+		c5.imprimirInscriptosPorNombre();
 		System.out.println("Curso 6: ");
-		c6.imprimirInscriptos();
+		c6.imprimirInscriptosPorNombre();
 		System.out.println("Curso 7: ");
-		c7.imprimirInscriptos();
+		c7.imprimirInscriptosPorNombre();
 		System.out.println("Curso 8: ");
-		c8.imprimirInscriptos();
+		c8.imprimirInscriptosPorNombre();
 		
 		// ------ Primeros Aprobados ------
 		//Alumnos aprobados en:
@@ -145,22 +128,42 @@ public class App {
 		c8.inscribir(a5); //a5 ua está cursando 3 materias del ciclo 2
 		
 		
-		// ------ Impresión de Inscriptos ------
+		// ------ Impresión de Inscriptos por Créditos ------
+		System.out.println("Alumnos ordenados por Créditos:");
 		System.out.println("Curso 1: ");
-		c1.imprimirInscriptos();
+		c1.imprimirInscriptosPorCreditos();
 		System.out.println("Curso 2: ");
-		c2.imprimirInscriptos();
+		c2.imprimirInscriptosPorCreditos();
 		System.out.println("Curso 3: ");
-		c3.imprimirInscriptos();
+		c3.imprimirInscriptosPorCreditos();
 		System.out.println("Curso 4: ");
-		c4.imprimirInscriptos();
+		c4.imprimirInscriptosPorCreditos();
 		System.out.println("Curso 5: ");
-		c5.imprimirInscriptos();
+		c5.imprimirInscriptosPorCreditos();
 		System.out.println("Curso 6: ");
-		c6.imprimirInscriptos();
+		c6.imprimirInscriptosPorCreditos();
 		System.out.println("Curso 7: ");
-		c7.imprimirInscriptos();
+		c7.imprimirInscriptosPorCreditos();
 		System.out.println("Curso 8: ");
-		c8.imprimirInscriptos();
+		c8.imprimirInscriptosPorCreditos();
+		
+		// ------ Impresión de Inscriptos por Libreta ------
+		System.out.println("Alumnos ordenados por Libreta:");
+		System.out.println("Curso 1: ");
+		c1.imprimirInscriptosPorLibreta();
+		System.out.println("Curso 2: ");
+		c2.imprimirInscriptosPorLibreta();
+		System.out.println("Curso 3: ");
+		c3.imprimirInscriptosPorLibreta();
+		System.out.println("Curso 4: ");
+		c4.imprimirInscriptosPorLibreta();
+		System.out.println("Curso 5: ");
+		c5.imprimirInscriptosPorLibreta();
+		System.out.println("Curso 6: ");
+		c6.imprimirInscriptosPorLibreta();
+		System.out.println("Curso 7: ");
+		c7.imprimirInscriptosPorLibreta();
+		System.out.println("Curso 8: ");
+		c8.imprimirInscriptosPorLibreta();
 	}
 }

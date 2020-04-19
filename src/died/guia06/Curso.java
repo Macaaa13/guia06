@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import died.guia06.comparadores.*;
+import died.guia06.excepciones.*;
 import died.guia06.util.Registro;
 
 /**
@@ -117,7 +119,7 @@ public class Curso {
 		}
 		//El alumno debe tener como mínimo los créditos necesarios
 		else if(a.creditosObtenidos() < this.creditosRequeridos) {
-			System.out.println("No posee los créditos suficientes para cursar");
+			System.out.println("No posee créditos suficientes para cursar");
 			b = false;
 		}
 		//El curso debe tener cupo
@@ -136,7 +138,7 @@ public class Curso {
 				this.inscriptos.add(a);
 				a.getCursando().add(this);
 			} catch (IOException e) {
-				System.out.println("Error al inscribir");
+				System.out.println("Error al registrar inscripción");
 				b = false;
 			}
 		}
@@ -147,14 +149,72 @@ public class Curso {
 	/**
 	 * imprime los inscriptos en orden alfabetico
 	 */
-	public void imprimirInscriptos() {
+	public void imprimirInscriptosPorNombre() {
 		try {
 			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
 			CompararNombre comparador = new CompararNombre();
 			Collections.sort(inscriptos, comparador);
 			System.out.println(inscriptos);
 		} catch (IOException e) {
-			System.out.println("Error al imprimir listado");
+			System.out.println("Error al registrar impresión de listado por nombre");
+		}
+	}
+	
+	/**
+	 * imprime los inscriptos ordenados por cantidad de créditos
+	 */
+	public void imprimirInscriptosPorCreditos() {
+		try {
+			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+			CompararCreditos comparador = new CompararCreditos();
+			Collections.sort(inscriptos, comparador);
+			System.out.println(inscriptos);
+		} catch (IOException e) {
+			System.out.println("Error al registrar impresión de listado por créditos");
+		}
+	}
+	
+	/**
+	 * imprime los inscriptos por número de libreta
+	 */
+	public void imprimirInscriptosPorLibreta() {
+		try {
+			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+			CompararLibreta comparador = new CompararLibreta();
+			Collections.sort(inscriptos, comparador);
+			System.out.println(inscriptos);
+		} catch (IOException e) {
+			System.out.println("Error al registrar impresión de listado por libreta");
+		}
+	}
+	
+	//Paso 07
+	public void inscribirAlumno(Alumno a) throws AlumnoYaInscriptoException, CreditosInsuficientesException, CupoLlenoException, LimiteMateriasMismoCicloException, IOException, RegistroAuditoriaException {
+		//El alumno no puede inscribirse a un curso al que ya está inscripto
+		if(this.inscriptos.contains(a)) {
+			throw new AlumnoYaInscriptoException("Ya está inscripto al curso");
+		}
+		//El alumno debe tener como mínimo los créditos necesarios
+		else if(a.creditosObtenidos() < this.creditosRequeridos) {
+			throw new CreditosInsuficientesException("No posee créditos suficientes para cursar");
+		}
+		//El curso debe tener cupo
+		else if(!(inscriptos.isEmpty()) && this.inscriptos.size() == this.cupo) {
+			throw new CupoLlenoException("El curso está lleno");
+		}
+		//El alumno solo puede hacer 3 cursos del mismo ciclo lectivo al mismo tiempo 
+		else if(this.cantidadCicloLectivo(a.getCursando(), this.cicloLectivo)==3) {
+			throw new LimiteMateriasMismoCicloException("Solo se pueden hacer 3 cursos con el mismo ciclo lectivo a la vez");
+		}
+		else {
+			try{
+				log.registrar(this, "inscribir ",a.toString());
+				this.inscriptos.add(a);
+				a.getCursando().add(this);
+			}
+			catch (IOException e) {
+				throw new RegistroAuditoriaException("Error al registrar la inscripción");
+			}	
 		}
 	}
 	

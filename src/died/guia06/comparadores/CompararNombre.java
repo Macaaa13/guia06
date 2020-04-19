@@ -1,6 +1,8 @@
-package died.guia06;
+package died.guia06.comparadores;
 
 import java.util.Comparator;
+
+import died.guia06.Alumno;
 
 public class CompararNombre implements Comparator<Alumno> {
 
